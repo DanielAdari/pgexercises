@@ -13,19 +13,24 @@ RUN apt-get update -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists
 
+RUN apt-get update && apt-get install -y \
+    libwww-perl libjson-perl cpanminus build-essential make \
+ && cpanm --notest HTML::Make
+
 ADD . /pgexercises
 RUN cp /pgexercises/nginx/nginx-dev.conf /etc/nginx/nginx.conf
 
 WORKDIR /pgexercises/SQLForwarder
-RUN mkdir WebContent/WEB-INF/lib
+RUN mkdir -p WebContent/WEB-INF/lib
 RUN echo "tomcatlib.dir=/usr/share/tomcat7/lib/" > build.properties
-RUN mv lib/*.jar /usr/share/tomcat7/lib/
+# RUN cp lib/*.jar /usr/share/tomcat7/lib/
+RUN find . -type f -name "*.jar" -exec cp {} /usr/share/tomcat7/lib/ \;
 RUN ant war
-RUN mv build/war/SQLForwarder.war /var/lib/tomcat7/webapps
+RUN cp build/war/SQLForwarder.war /var/lib/tomcat7/webapps
 
 WORKDIR /pgexercises
 RUN sed -i 's|jdbc:postgresql://localhost:6543/exercises|jdbc:postgresql://localhost:5432/exercises|' database/context.xml \
- && sed -i 's|password=""|password="none"|g' database/context.xml
+ && sed -i 's|password=""|password="SEGELisG0D"|g' database/context.xml
 RUN cp database/context.xml /var/lib/tomcat7/conf
 RUN echo "listen_addresses='*'" >> /etc/postgresql/${PGVERSION}/main/postgresql.conf
 RUN cp -a /etc/postgresql/${PGVERSION}/main/pg_hba.conf /etc/postgresql/${PGVERSION}/main/pg_hba.conf.bak \
@@ -33,11 +38,11 @@ RUN cp -a /etc/postgresql/${PGVERSION}/main/pg_hba.conf /etc/postgresql/${PGVERS
  && echo "host all all all trust" >> /etc/postgresql/${PGVERSION}/main/pg_hba.conf \
  && service postgresql start && pg_isready \
  && psql -U postgres -f database/clubdata.sql \
- && psql -U postgres -c "ALTER USER pgexercises WITH PASSWORD 'none'" \
+ && psql -U postgres -c "ALTER USER pgexercises WITH PASSWORD 'SEGELisG0D'" \
  && cd scripts \
  ## This is beyong ugly, I need to hack a hack
  && sed -i 's/psql93/psql/g' runpsql \
- && ./processdocs.pl ../ 1 \
+#  && ./processdocs.pl ../ 1 \
  && echo "listen_addresses='*'" >> /etc/postgresql/${PGVERSION}/main/postgresql.conf \
  && mkdir -p /usr/local/nginx && ln -s /pgexercises/site /usr/local/nginx/site
 
@@ -49,5 +54,4 @@ EXPOSE 80 5432
 
 ADD docker_entrypoint.sh /docker_entrypoint.sh
 RUN chown postgres:postgres /docker_entrypoint.sh
-USER postgres
 CMD ["/bin/bash", "/docker_entrypoint.sh"]
