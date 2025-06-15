@@ -50,7 +50,7 @@ html, body{
 	font-family: "Courier New";
 }
 
-a.listlink:visited {color:#CD3804;}
+a.listlink:visited {color:#064d82;}
 
 #helpcontent {
 	width:705px;
@@ -63,9 +63,9 @@ a.listlink:visited {color:#CD3804;}
 	box-sizing: border-box;
 	padding-left:3px;
 	padding-right:3px;
-	border-bottom: 1px dashed #ce4213;
-	border-left: 1px dashed #ce4213;
-	border-right: 1px dashed #ce4213;
+	border-bottom: 1px dashed #064d82;
+	border-left: 1px dashed #064d82;
+	border-right: 1px dashed #064d82;
 	position:relative;
 }
 
@@ -75,15 +75,15 @@ a.listlink:visited {color:#CD3804;}
 	line-height: 5px;
 	font-size: 11px;
 	text-align: left;
-	background-image: linear-gradient(to bottom,#f59877, #FF9062);
+	background-image: linear-gradient(to bottom,#064d82, #064d82);
 }
 
 #schemaremindercontents {
 	height: 230px;
         display: none;
-	border-left: 1px dashed #ce4213;
-	border-right: 1px dashed #ce4213;
-	border-bottom: 1px dashed #ce4213;
+	border-left: 1px dashed #064d82;
+	border-right: 1px dashed #064d82;
+	border-bottom: 1px dashed #064d82;
 }
 
 #schemareminderimage {
@@ -92,7 +92,7 @@ a.listlink:visited {color:#CD3804;}
 }
 
 #schemareminder:hover {
-    background-color: #ff8356;
+    background-color: #2b7fbe;
 }
 
 #schemareminderarrow {

@@ -1,13 +1,13 @@
-/* #D44413*/
+/* #064d82*/
 .splitbarV {
 float:left;width:6px;height:100%;
 line-height:0px;font-size:0px;
-border-left:solid 1px #FF9062;border-right:solid 1px #FF9062;
-background:#D44413 url(img/panev.gif) 0% 50%;
+border-left:solid 1px #064d82;border-right:solid 1px #064d82;
+background:#064d82 url(img/panev.gif) 0% 50%;
 }
 .splitbarH {
 height:6px;text-align:left;line-height:0px;font-size:0px;
-border-top:solid 1px #FF9062;border-bottom:solid 1px #FF9062;
+border-top:solid 1px #064d82;border-bottom:solid 1px #064d82;
 background:#cbe1fb url(img/paneh.gif) 50% 0%;
 }
 
