@@ -416,7 +416,7 @@ function sortJSONResults(jsonResults) {
 function setPageSuccess() {
 	//if we've got it right, make the header tick visible and show the answers
 	$(".headertick").css('visibility', 'visible');
-	toggleAnswers(true)
+	// toggleAnswers(false)
 }
 
 function initKeyHandler() {
